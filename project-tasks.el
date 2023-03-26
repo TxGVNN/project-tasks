@@ -6,7 +6,7 @@
 ;; Keywords: project, workflow, tools
 ;; Homepage: https://github.com/TxGVNN/project-tasks
 ;; Package-Requires: ((emacs "26.1") (transient "0.3.7"))
-;; Version: 0.0.1
+;; Version: 0.1.0
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -82,6 +82,22 @@
     (with-current-buffer (current-buffer)
       (project-tasks-current-buffer))))
 
+;;;###autoload
+(defun project-tasks-capture ()
+  "Org capture to project."
+  (interactive)
+  (unless (bound-and-true-p org-default-notes-file) (require 'org-capture))
+  (let* ((project (project-root (project-current t)))
+         (org-default-notes-file (concat project project-tasks-file)))
+    (call-interactively 'org-capture)))
+
+;;;###autoload
+(defun project-tasks-jump ()
+  "Jump to the project task file."
+  (interactive)
+  (let* ((project (project-root (project-current t)))
+         (org-default-notes-file (concat project project-tasks-file)))
+    (find-file org-default-notes-file)))
 
 (provide 'project-tasks)
 ;;; project-tasks.el ends here
