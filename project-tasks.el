@@ -1,4 +1,4 @@
-;;; project-tasks --- Manage tasks for a project power by org, org-babel, transient  -*- lexical-binding: t; -*-
+;;; project-tasks.el --- Efficient task management for your project  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2023 Giap Tran
 
