@@ -22,8 +22,10 @@
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ;;; Commentary:
-;;    (with-eval-after-load 'project-tasks
-;;      (setq project-tasks-file "tasks.org"))
+;; (use-package project-tasks
+;;   :ensure t :defer t
+;;   ;; :custom (project-tasks-file "tasks.org")
+;;   :commands (project-tasks))
 
 ;;; Code:
 (require 'project)
