@@ -1,6 +1,23 @@
 * Tasks
-** Run uname -a on current system
+** Run shell: uname -a
 #+NAME: run uname -a
-#+begin_src shell
+#+begin_src sh :results none
 uname -a
+#+end_src
+
+** Run compile: top
+#+name: run top
+#+begin_src compile :name "docker-compose-up" :results none
+docker-compose up
+#+end_src
+
+** Run shell terminal
+
+#+name: run shell terminal
+#+begin_src elisp :results none
+(require 'eepitch)
+(eepitch '(shell "project-tasks"))
+(eepitch-line "date +%s")
+(eepitch-line "sleep 2")
+(eepitch-line "date +%s")
 #+end_src
