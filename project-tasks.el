@@ -6,7 +6,7 @@
 ;; Keywords: project, workflow, tools
 ;; Homepage: https://github.com/TxGVNN/project-tasks
 ;; Package-Requires: ((emacs "26.1") (transient "0.3.7"))
-;; Version: 0.1.0
+;; Version: 0.1.1
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -86,7 +86,7 @@
 (defun project-tasks-capture ()
   "Org capture to project."
   (interactive)
-  (unless (bound-and-true-p org-default-notes-file) (require 'org-capture))
+  (unless (featurep 'org-capture) (require 'org-capture))
   (let* ((project (project-root (project-current t)))
          (org-default-notes-file (concat project project-tasks-file)))
     (call-interactively 'org-capture)))
