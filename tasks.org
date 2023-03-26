@@ -1,0 +1,6 @@
+* Tasks
+** Run uname -a on current system
+#+NAME: run uname -a
+#+begin_src shell
+uname -a
+#+end_src
