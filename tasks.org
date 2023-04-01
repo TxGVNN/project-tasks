@@ -7,6 +7,12 @@ uname -a
 
 ** Run compile: top
 #+name: run top
+#+begin_src compile :name "top" :results none
+top
+#+end_src
+
+** Run compile: docker-compose up
+#+name: docker-compose up
 #+begin_src compile :name "docker-compose-up" :results none
 docker-compose up
 #+end_src
