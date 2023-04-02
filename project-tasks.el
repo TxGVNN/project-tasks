@@ -5,8 +5,8 @@
 ;; Author: Giap Tran <txgvnn@gmail.com>
 ;; Keywords: project, workflow, tools
 ;; Homepage: https://github.com/TxGVNN/project-tasks
-;; Package-Requires: ((emacs "26.1") (transient "0.3.7"))
-;; Version: 0.1.1
+;; Package-Requires: ((emacs "26.1"))
+;; Version: 0.2.0
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -30,7 +30,6 @@
 ;;; Code:
 (require 'project)
 (require 'org)
-(require 'transient)
 
 ;;; Custom vars
 (defgroup project-tasks nil
@@ -53,24 +52,8 @@
   (let ((src-block-names (org-babel-src-block-names)))
     (unless src-block-names
       (error "No source blocks found in current buffer"))
-    (transient-define-prefix project-tasks-eval-source-block-transient ()
-      "Select source block to evaluate."
-      ["Source block selection"
-       ("q" "Quit" transient-quit-all)]
-      [:setup-children
-       (lambda (_)
-         (transient-parse-suffixes
-          'project-tasks-eval-source-block-transient
-          (seq-map-indexed
-           (lambda (src-block-name idx)
-             (list (format "%d" idx) src-block-name
-                   (lambda ()
-                     (interactive)
-                     (project-tasks--eval
-                      (oref (transient-suffix-object) :description)))))
-           src-block-names)))])
-    (transient-setup 'project-tasks-eval-source-block-transient)))
-
+    (let ((task (completing-read "Task: " src-block-names nil t)))
+      (project-tasks--eval task))))
 
 ;;;###autoload
 (defun project-tasks ()
@@ -78,8 +61,7 @@
   (interactive)
   (let* ((project (project-root (project-current t)))
          (org-default-notes-file (concat project project-tasks-file)))
-    (find-file org-default-notes-file)
-    (with-current-buffer (current-buffer)
+    (with-current-buffer (find-file-noselect org-default-notes-file)
       (project-tasks-current-buffer))))
 
 ;;;###autoload
