@@ -1,0 +1,68 @@
+
+* project-tasks.el - Efficient task management for your project
+** Concept
+
+Formed during work on a project, I need to:
+- run docker-compose up
+- access the database shell of the db service in docker-compose
+- run mitmproxy
+- run a new shell
+
+Using org-babel of org-mode is a great solution (~Literate Devops with Org-Mode~).
+
+Therefore, this package provides a convenient interface for accessing those tasks instead of accessing org-mode files and executing org-babel code blocks.
+
+*** Features
+- M-x ~project-tasks~
+#+begin_src markdown
+Find-file `project-tasks-file` org file
+  -> get all src-blocks by `(org-babel-src-block-names)`
+    -> display src-blocks to user
+      -> user select and run `(org-babel-execute-src-block)`
+#+end_src
+
+- M-x ~project-tasks-capture~
+#+begin_src markdown
+Let `org-default-notes-file` to `current_project/project-tasks-file`
+  -> `(org-capture)`
+#+end_src
+
+- M-x ~project-tasks-jump~
+#+begin_src markdown
+Find-file `current_project/project-tasks-file`
+#+end_src
+
+** Usage
+#+begin_src elisp
+(use-package project-tasks
+  :ensure t :defer t
+
+  :straight
+  ( :host github
+    :repo "TxGVNN/project-tasks"
+    :files ("*.el"))
+
+  :after (project)
+  :commands (project-tasks)
+
+  ;; Show project-tasks when switching projects
+  :init
+  (add-to-list 'project-switch-commands '(project-tasks "tasks") t)
+
+  ;; Want a different file
+  :custom
+  (project-tasks-file "tasks.org")
+
+  ;; Bind project-tasks to project keymap
+  :bind
+  (:map project-prefix-map
+        ("P" . project-tasks)
+        ("o" . project-tasks-capture)
+        ("O" . project-tasks-jump))
+  )
+
+#+end_src
+
+
+*** Notice
+You need to ensure that your code blocks work as intended. This package serves as an interface for interacting with Org files but does not affect your Org configuration.
