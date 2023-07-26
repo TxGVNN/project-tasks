@@ -1,7 +1,7 @@
 * Tasks
-** Run shell: uname -a
+** Run compile: uname -a
 #+NAME: run uname -a
-#+begin_src sh :results none
+#+begin_src compile :results none
 uname -a
 #+end_src
 
@@ -17,9 +17,9 @@ top
 docker-compose up
 #+end_src
 
-** Run shell terminal
+** Open shell terminal
 
-#+name: run shell terminal
+#+name: Open shell terminal
 #+begin_src elisp :results none
 (require 'eepitch)
 (eepitch '(shell "project-tasks"))
