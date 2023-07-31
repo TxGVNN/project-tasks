@@ -1,8 +1,7 @@
-
 * project-tasks.el - Efficient task management for your project
 ** Concept
 
-Formed during work on a project, I need to:
+Formed during work on projects, I need to:
 - run docker-compose up
 - access the database shell of the db service in docker-compose
 - run mitmproxy
@@ -45,11 +44,14 @@ Find-file `current_project/project-tasks-file`
   :after (project)
   :commands (project-tasks)
 
-  ;; Show project-tasks when switching projects
   :init
+  ;; Show project-tasks when switching projects
   (add-to-list 'project-switch-commands '(project-tasks "tasks") t)
+  ;; Add action to embark-file map
+  (with-eval-after-load 'embark
+    (define-key embark-file-map (kbd "P") #'project-tasks-in-dir))
 
-  ;; Want a different file
+  ;; Set a different default filename
   :custom
   (project-tasks-file "tasks.org")
 
