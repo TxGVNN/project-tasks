@@ -6,7 +6,7 @@
 ;; Keywords: project, workflow, tools
 ;; Homepage: https://github.com/TxGVNN/project-tasks
 ;; Package-Requires: ((emacs "26.1"))
-;; Version: 0.2.0
+;; Version: 0.3.0
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -55,14 +55,25 @@
     (let ((task (completing-read "Task: " src-block-names nil t)))
       (project-tasks--eval task))))
 
+
 ;;;###autoload
-(defun project-tasks ()
-  "Open project tasks file and display tasks."
-  (interactive)
-  (let* ((project (project-root (project-current t)))
-         (org-default-notes-file (concat project project-tasks-file)))
+(defun project-tasks (file)
+  "Open project tasks FILE and display tasks."
+  (interactive "P")
+  (setq file (if (equal file '(4))
+                 (read-file-name "Choose file: ")
+               file))
+  (let* ((org-default-notes-file
+          (or file
+              (concat (project-root (project-current t)) project-tasks-file))))
     (with-current-buffer (find-file-noselect org-default-notes-file)
       (project-tasks-current-buffer))))
+
+;;;###autoload
+(defun project-tasks-in-dir (dir)
+  "Run `project-tasks' in DIR."
+  (interactive "D")
+  (project-tasks (concat dir project-tasks-file)))
 
 ;;;###autoload
 (defun project-tasks-capture ()
