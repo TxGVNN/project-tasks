@@ -51,9 +51,11 @@ Find-file `current_project/project-tasks-file`
   (with-eval-after-load 'embark
     (define-key embark-file-map (kbd "P") #'project-tasks-in-dir))
 
-  ;; Set a different default filename
   :custom
+  ;; Set the default filename in project
   (project-tasks-file "tasks.org")
+  ;; Set the function to get current project dir
+  (project-tasks-root-func #'project-tasks-project-root)
 
   ;; Bind project-tasks to project keymap
   :bind

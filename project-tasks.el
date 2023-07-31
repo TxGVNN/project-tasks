@@ -28,7 +28,6 @@
 ;;   :commands (project-tasks))
 
 ;;; Code:
-(require 'project)
 (require 'org)
 
 ;;; Custom vars
@@ -40,6 +39,17 @@
   "File to store project tasks."
   :type 'string
   :group 'project-tasks)
+
+(defcustom project-tasks-root-func #'project-tasks-project-root
+  "Function to get project root directory."
+  :type 'function
+  :group 'project-tasks)
+
+(defun project-tasks-project-root ()
+  "Get project root by builtin `project' package."
+  (if (fboundp 'project-root)
+      (project-root (project-current t))
+    (error "Please install `project' package or set `project-tasks-root-func'")))
 
 (defun project-tasks--eval(task)
   "Execute a source block with name TASK."
