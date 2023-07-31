@@ -6,7 +6,7 @@
 ;; Keywords: project, workflow, tools
 ;; Homepage: https://github.com/TxGVNN/project-tasks
 ;; Package-Requires: ((emacs "26.1"))
-;; Version: 0.3.0
+;; Version: 0.4.0
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
