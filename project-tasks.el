@@ -75,7 +75,7 @@
                file))
   (let* ((org-default-notes-file
           (or file
-              (concat (project-root (project-current t)) project-tasks-file))))
+              (concat (funcall project-tasks-root-func) project-tasks-file))))
     (with-current-buffer (find-file-noselect org-default-notes-file)
       (project-tasks-current-buffer))))
 
@@ -90,7 +90,7 @@
   "Org capture to project."
   (interactive)
   (unless (featurep 'org-capture) (require 'org-capture))
-  (let* ((project (project-root (project-current t)))
+  (let* ((project (funcall project-tasks-root-func))
          (org-default-notes-file (concat project project-tasks-file)))
     (call-interactively 'org-capture)))
 
@@ -98,7 +98,7 @@
 (defun project-tasks-jump ()
   "Jump to the project task file."
   (interactive)
-  (let* ((project (project-root (project-current t)))
+  (let* ((project (funcall project-tasks-root-func))
          (org-default-notes-file (concat project project-tasks-file)))
     (find-file org-default-notes-file)))
 
