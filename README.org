@@ -41,7 +41,6 @@ Find-file `current_project/project-tasks-file`
     :repo "TxGVNN/project-tasks"
     :files ("*.el"))
 
-  :after (project)
   :commands (project-tasks)
 
   :init

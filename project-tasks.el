@@ -6,7 +6,7 @@
 ;; Keywords: project, workflow, tools
 ;; Homepage: https://github.com/TxGVNN/project-tasks
 ;; Package-Requires: ((emacs "26.1"))
-;; Version: 0.4.0
+;; Version: 0.4.1
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -24,8 +24,28 @@
 ;;; Commentary:
 ;; (use-package project-tasks
 ;;   :ensure t :defer t
-;;   ;; :custom (project-tasks-file "tasks.org")
-;;   :commands (project-tasks))
+;;   :commands (project-tasks)
+;;
+;;   :init
+;;   ;; Show project-tasks when switching projects
+;;   (add-to-list 'project-switch-commands '(project-tasks "tasks") t)
+;;   ;; Add action to embark-file map
+;;   (with-eval-after-load 'embark
+;;     (define-key embark-file-map (kbd "P") #'project-tasks-in-dir))
+;;
+;;   :custom
+;;   ;; Set the default filename in project
+;;   (project-tasks-file "tasks.org")
+;;   ;; Set the function to get current project dir
+;;   (project-tasks-root-func #'project-tasks-project-root)
+;;
+;;   ;; Bind project-tasks to project keymap
+;;   :bind
+;;   (:map project-prefix-map
+;;         ("P" . project-tasks)
+;;         ("o" . project-tasks-capture)
+;;         ("O" . project-tasks-jump))
+;;   )
 
 ;;; Code:
 (require 'org)
