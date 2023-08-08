@@ -6,9 +6,9 @@ uname -a
 #+end_src
 
 ** Run compile: top
-#+name: run top
-#+begin_src compile :name "top" :results none
-top
+#+name: Run top
+#+begin_src elisp :results none
+(comint-run "top")
 #+end_src
 
 ** Run compile: docker-compose up
