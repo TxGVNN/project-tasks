@@ -1,11 +1,5 @@
 * Tasks
-** Run compile: uname -a
-#+NAME: run uname -a
-#+begin_src compile :results none
-uname -a
-#+end_src
-
-** Run compile: top
+** Run top
 #+name: Run top
 #+begin_src elisp :results none
 (comint-run "top")
@@ -19,6 +13,7 @@ docker-compose up
 
 ** Open shell terminal
 
+#+description: Open shell and run some commands for demo
 #+name: Open shell terminal
 #+begin_src elisp :results none
 (require 'eepitch)
@@ -26,4 +21,15 @@ docker-compose up
 (eepitch-line "date +%s")
 (eepitch-line "sleep 2")
 (eepitch-line "date +%s")
+#+end_src
+
+** docker -> psql
+#+description: we have a postgres service and want to access psql
+#+name: docker -> psql
+#+begin_src elisp :results none
+(require 'eepitch)
+(when (not (get-buffer-process "exec pg"))
+  (eepitch '(shell "exec pg"))
+  (eepitch-line "docker-compose exec pg bash")
+  (eepitch-line (format "PGPASSWORD=%s psql -U postgres" (getenv "PGPASSWORD"))))
 #+end_src
