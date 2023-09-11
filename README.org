@@ -1,4 +1,6 @@
-* project-tasks.el - Efficient task management for your project
+* project-tasks.el - Efficient task management for your projects
+[[https://melpa.org/#/project-tasks][file:https://melpa.org/packages//project-tasks-badge.svg]]
+[[http://www.gnu.org/licenses/gpl-3.0.html][http://img.shields.io/:license-gpl3-blue.svg]]
 ** Concept
 
 Formed during work on projects, I need to:
