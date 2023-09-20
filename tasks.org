@@ -31,5 +31,16 @@ docker-compose up
 (when (not (get-buffer-process "exec pg"))
   (eepitch '(shell "exec pg"))
   (eepitch-line "docker-compose exec pg bash")
-  (eepitch-line (format "PGPASSWORD=%s psql -U postgres" (getenv "PGPASSWORD"))))
+  (eepitch-line (format "PGPASSWORD=%s PGUSER=postgres psql" (getenv "PGPASSWORD"))))
+#+end_src
+
+** docker -> pg -> pg_dump
+#+name: docker -> pg -> pg_dump
+#+begin_src elisp :results none
+(eepitch '(shell "*pg_dump*"))
+(eepitch-line "docker exec -it pg bash")
+(eepitch-line (format "PGPASSWORD=%s PGUSER=postgres pg_dump db_name > /tmp/pg_dump.sql" (getenv "PGPASSWORD"))
+(eepitch-line "exit")
+(find-file-literally "/docker:pg:/tmp/pg_dump.sql")
+
 #+end_src
