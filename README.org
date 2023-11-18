@@ -71,3 +71,24 @@ Find-file `current_project/project-tasks-file`
 
 *** Notice
 You need to ensure that your code blocks work as intended. This package serves as an interface for interacting with Org files but does not affect your Org configuration.
+
+** Examples
+Declare some tasks in ~tasks.org~ as below:
+#+begin_src org
+* Tasks
+,#+name: makemigrations
+,#+begin_src compile :name makemigrations
+ django-admin makemigrations
+,#+end_src
+
+,#+name: browser
+,#+begin_src compile :name browser
+ chromium --temp-profile http://localhost:8080
+,#+end_src
+#+end_src
+
+When you call ~M-x project-tasks~, it will display tasks that you want to choose to run
+
+[[https://txgvnn.github.io/images/project-tasks.png]]
+
+You can check more examples in ~tasks.org~ file in this repository.
