@@ -6,12 +6,15 @@
 #+end_src
 
 ** Run compile: docker-compose up
+~Require package `ob-compile`~
+
 #+name: docker-compose up
 #+begin_src compile :name "docker-compose-up" :results none
 docker-compose up
 #+end_src
 
 ** Open shell terminal
+~Require package `eev`~
 
 #+description: Open shell and run some commands for demo
 #+name: Open shell terminal
@@ -24,6 +27,7 @@ docker-compose up
 #+end_src
 
 ** docker -> psql
+~Require package `eev`~
 #+description: we have a postgres service and want to access psql
 #+name: docker -> psql
 #+begin_src elisp :results none
@@ -35,6 +39,7 @@ docker-compose up
 #+end_src
 
 ** docker -> pg -> pg_dump
+~Require package `eev`~
 #+name: docker -> pg -> pg_dump
 #+begin_src elisp :results none
 (eepitch '(shell "*pg_dump*"))
