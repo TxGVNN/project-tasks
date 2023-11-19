@@ -34,14 +34,10 @@ Find-file `current_project/project-tasks-file`
 #+end_src
 
 ** Usage
+
 #+begin_src elisp
 (use-package project-tasks
   :ensure t :defer t
-
-  :straight
-  ( :host github
-    :repo "TxGVNN/project-tasks"
-    :files ("*.el"))
 
   :commands (project-tasks)
 
