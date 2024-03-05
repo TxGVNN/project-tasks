@@ -16,21 +16,10 @@ Therefore, this package provides a convenient interface for accessing those task
 *** Features
 - M-x ~project-tasks~
 #+begin_src markdown
-Find-file `project-tasks-file` org file
+Find-file all files in `project-tasks-files`
   -> get all src-blocks by `(org-babel-src-block-names)`
     -> display src-blocks to user
       -> user select and run `(org-babel-execute-src-block)`
-#+end_src
-
-- M-x ~project-tasks-capture~
-#+begin_src markdown
-Let `org-default-notes-file` to `current_project/project-tasks-file`
-  -> `(org-capture)`
-#+end_src
-
-- M-x ~project-tasks-jump~
-#+begin_src markdown
-Find-file `current_project/project-tasks-file`
 #+end_src
 
 ** Usage
@@ -49,18 +38,22 @@ Find-file `current_project/project-tasks-file`
     (define-key embark-file-map (kbd "P") #'project-tasks-in-dir))
 
   :custom
-  ;; Set the default filename in project
-  (project-tasks-file "tasks.org")
+  ;; Set the list of tasks files
+  (project-tasks-files '("tasks.org"))
+
+  ;; Set the ignore files
+  ;; (project-tasks-ignore-files '("README.org"))
+
   ;; Set the function to get current project dir
-  (project-tasks-root-func #'project-tasks-project-root)
+  ;; (project-tasks-root-func #'project-tasks-project-root)
+
+  ;; Set the separator between file name and task name
+  ;; (project-tasks-separator " -> ")
 
   ;; Bind project-tasks to project keymap
   :bind
-  (:map project-prefix-map
-        ("P" . project-tasks)
-        ("o" . project-tasks-capture)
-        ("O" . project-tasks-jump))
-  )
+  (:map project-prefix-map ("P" . project-tasks))
+)
 
 #+end_src
 
