@@ -109,9 +109,9 @@
 (defun project-tasks ()
   "Open project tasks and display tasks."
   (interactive)
-  (let* ((project-root-dir (funcall project-tasks-root-func))
+  (let* ((default-directory (funcall project-tasks-root-func))
          (src-block-names (mapcar (lambda (file)
-                                    (let ((file-in-project (file-relative-name file project-root-dir)))
+                                    (let ((file-in-project (file-relative-name file default-directory)))
                                       (mapcar (lambda (x)
                                                 (concat file-in-project project-tasks-separator x))
                                               (with-current-buffer (find-file-noselect file)
