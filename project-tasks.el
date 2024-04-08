@@ -127,5 +127,16 @@
         (with-current-buffer (find-file-noselect org-default-notes-file)
           (project-tasks--eval task-name))))))
 
+(defun project-tasks-goto-task (task)
+  "Go to SRC of TASK in project. TASK is a string with format FILE -> TASK-NAME."
+  (interactive "sTask: ")
+  (let ((file (car (split-string task project-tasks-separator)))
+        (task-name (mapconcat #'identity (cdr (split-string task project-tasks-separator))
+                              project-tasks-separator)))
+    (if (string-empty-p task-name) ;; call on current buffer without separator. Ex: #+call: func()
+        (setq task-name file)
+      (find-file file))
+    (org-babel-goto-named-src-block task-name)))
+
 (provide 'project-tasks)
 ;;; project-tasks.el ends here
