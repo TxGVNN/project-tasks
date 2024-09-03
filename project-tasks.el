@@ -80,6 +80,7 @@
   (org-babel-goto-named-src-block task)
   (org-babel-execute-src-block))
 
+;;;###autoload
 (defun project-tasks-current-buffer ()
   "Evaluate a selected source block from current Org buffer."
   (interactive)
