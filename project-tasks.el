@@ -104,8 +104,10 @@ Options:
   "Get list of task files by find command."
   (let ((default-directory (funcall project-tasks-root-func))
         (files (mapcar #'file-name-nondirectory project-tasks-files)))
-    (split-string (shell-command-to-string
-                   (format "find . -type f -iregex '%s' -printf '%%P\n'" (string-join files "\\|"))))))
+    (split-string
+     (shell-command-to-string
+      (format "find . \\( -type f -o -type l \\) -iregex '%s' -printf '%%P\n'"
+              (string-join files "\\|")))))))
 
 (defun project-tasks--get-task-files-by-vc ()
   "Get list of task files and exclude ignored files."
