@@ -69,6 +69,16 @@
   :type 'function
   :group 'project-tasks)
 
+(defcustom project-tasks-get-tasks-files-func #'project-tasks--get-task-files-by-vc
+  "Function to get tasks files in root directory.
+The function should return a list of task files.
+
+Options:
+- project-tasks--get-task-files-by-vc (default)
+- project-tasks--get-task-files-by-find"
+  :type 'function
+  :group 'project-tasks)
+
 (defun project-tasks-project-root ()
   "Get project root by builtin `project' package."
   (if (fboundp 'project-root)
@@ -90,7 +100,14 @@
     (let ((task (completing-read "Select task: " src-block-names nil t)))
       (project-tasks--eval task))))
 
-(defun project-tasks--get-task-files ()
+(defun project-tasks--get-task-files-by-find()
+  "Get list of task files by find command."
+  (let ((default-directory (funcall project-tasks-root-func))
+        (files (mapcar #'file-name-nondirectory project-tasks-files)))
+    (split-string (shell-command-to-string
+                   (format "find . -type f -iregex '%s' -printf '%%P\n'" (string-join files "\\|"))))))
+
+(defun project-tasks--get-task-files-by-vc ()
   "Get list of task files and exclude ignored files."
   (let* ((project-root-dir (funcall project-tasks-root-func))
          (project-files (mapcar (lambda (file)
@@ -117,7 +134,7 @@
                                                 (concat file-in-project project-tasks-separator x))
                                               (with-current-buffer (find-file-noselect file)
                                                 (org-babel-src-block-names)))))
-                                  (project-tasks--get-task-files))))
+                                  (funcall project-tasks-get-tasks-files-func))))
     (unless src-block-names
       (error "No source blocks found in project"))
     (let ((task (completing-read "Select task: " (apply #'append src-block-names) nil t)))
