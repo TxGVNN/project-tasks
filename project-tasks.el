@@ -1,12 +1,12 @@
 ;;; project-tasks.el --- Efficient task management for your project  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2023 Giap Tran
+;; Copyright (C) 2023-2024 Giap Tran
 
 ;; Author: Giap Tran <txgvnn@gmail.com>
 ;; Keywords: project, workflow, tools
 ;; Homepage: https://github.com/TxGVNN/project-tasks
 ;; Package-Requires: ((emacs "26.1") (project "0.6.0"))
-;; Version: 0.6.0
+;; Version: 0.7.0
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
