@@ -107,7 +107,7 @@ Options:
     (split-string
      (shell-command-to-string
       (format "find . \\( -type f -o -type l \\) -iregex '%s' -printf '%%P\n'"
-              (string-join files "\\|")))))))
+              (string-join files "\\|"))))))
 
 (defun project-tasks--get-task-files-by-vc ()
   "Get list of task files and exclude ignored files."
