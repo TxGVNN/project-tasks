@@ -47,6 +47,9 @@ Find-file all files in `project-tasks-files`
   ;; Set the function to get current project dir
   ;; (project-tasks-root-func #'project-tasks-project-root)
 
+  ;; Function to get tasks files in root directory
+  ;; (project-tasks-get-tasks-files-func #'project-tasks--get-task-files-by-vc)
+
   ;; Set the separator between file name and task name
   ;; (project-tasks-separator " -> ")
   :config
