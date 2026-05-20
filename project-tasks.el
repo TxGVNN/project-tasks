@@ -6,7 +6,7 @@
 ;; Keywords: project, workflow, tools
 ;; Homepage: https://github.com/TxGVNN/project-tasks
 ;; Package-Requires: ((emacs "26.1") (project "0.6.0"))
-;; Version: 0.7.1
+;; Version: 0.7.2
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -87,8 +87,9 @@ Options:
 
 (defun project-tasks--eval(task)
   "Execute a source block with name TASK."
-  (org-babel-goto-named-src-block task)
-  (org-babel-execute-src-block))
+  (save-excursion
+    (org-babel-goto-named-src-block task)
+    (org-babel-execute-src-block)))
 
 ;;;###autoload
 (defun project-tasks-current-buffer ()
