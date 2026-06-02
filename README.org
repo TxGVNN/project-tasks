@@ -35,7 +35,7 @@ Find-file all files in `project-tasks-files`
   (add-to-list 'project-switch-commands '(project-tasks "tasks") t)
   ;; Add action to embark-file map
   (with-eval-after-load 'embark
-    (define-key embark-file-map (kbd "P") #'project-tasks-in-dir))
+    (define-key embark-file-map (kbd "t") #'project-tasks-in-dir))
 
   :custom
   ;; Set the list of tasks files
@@ -61,7 +61,7 @@ Find-file all files in `project-tasks-files`
   (add-to-list 'embark-keymap-alist '(project-task . embark-project-task-actions))
   ;; Bind project-tasks to project keymap
   :bind
-  (:map project-prefix-map ("P" . project-tasks))
+  (:map project-prefix-map ("t" . project-tasks))
 )
 
 #+end_src
